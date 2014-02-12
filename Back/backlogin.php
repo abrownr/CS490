@@ -8,7 +8,7 @@
    
     $User = $_POST['Username'];
     $Pass = $_POST['Password'];
-    $Bounce = $_POST['check'];
+    $Bounce = $_POST['Check'];
     
     $sql = mysql_query("SELECT COUNT(*) FROM Login L WHERE Username = '$User' AND Password = '$Pass'");
     $info = mysql_fetch_assoc($sql);
