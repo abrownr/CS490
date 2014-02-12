@@ -2,8 +2,6 @@
     $Username = $_POST['Username'];
     $Password = $_POST['Password'];
     
-    //$fields = array('Username' => $Username, 'Password' => $Password, 'HP' => $Check);
-    
     $url = "https://moodleauth00.njit.edu/cpip_serv/login.aspx?esname=moodle";
     $postfields = "__VIEWSTATE=%2FwEPDwUJNDIzOTY1MjU5ZGQdLVY%2B81xpmN0ATE7y41EHAhVaCA%3D%3D&txtUCID=".$Username."&txtPasswd=".$Password."&btnLogin=Login&__EVENTVALIDATION=%2FwEWBAK7zbGBDQLr9O%2BIBwK01ba%2BBAKC3IeGDOn1GTxupWw9xfJhOXrBSFX6INdC";        
     
@@ -19,10 +17,13 @@
     curl_close($bounce);
 
     // SENDS POST TO BACKEND TO CHECK DATABASE
+    $fields = array('Username' => $Username, 'Password' => $Password, 'Check' => $Check);
+
     $db = curl_init();
     curl_setopt($db, CURLOPT_URL, "http://web.njit.edu/~ovl2/CS490/Back/backlogin.php");
     curl_setopt($db, CURLOPT_POST, 1);
-    curl_setopt($db, CURLOPT_POSTFIELDS, "Username=$Username&Password=$Password&check=$check");
+    //curl_setopt($db, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($db, CURLOPT_POSTFIELDS, "Username=$Username&Password=$Password&Check=$check");
     curl_setopt($db, CURLOPT_FOLLOWLOCATION, 1);
     
     $outputDB = curl_exec($db);
